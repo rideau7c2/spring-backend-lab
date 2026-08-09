@@ -1,7 +1,7 @@
 package com.gitlab.rideau7c2.backendlab;
 
-import com.gitlab.rideau7c2.backendlab.component.LoginCounter;
-import com.gitlab.rideau7c2.backendlab.model.LoginEvent;
+import com.gitlab.rideau7c2.backendlab.login.LoginCounter;
+import com.gitlab.rideau7c2.backendlab.login.LoginEvent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

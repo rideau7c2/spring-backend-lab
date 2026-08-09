@@ -1,6 +1,5 @@
-package com.gitlab.rideau7c2.backendlab.component;
+package com.gitlab.rideau7c2.backendlab.login;
 
-import com.gitlab.rideau7c2.backendlab.model.LoginEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
