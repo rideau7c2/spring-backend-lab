@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,30 +27,30 @@ public class InMemoryUserRepositoryTests {
 
     @Test
     void findExistingUser() {
-        User user = userRepository.findById(existsUserId);
-        assertEquals("Test", user.name());
+        Optional<User> user = userRepository.findById(existsUserId);
+        assertEquals("Test", user.orElseThrow().name());
     }
 
     @Test
     void findNonExistingUser() {
-        User user = userRepository.findById(NOT_EXISTS_USER_ID);
-        assertNull(user);
+        Optional<User> user = userRepository.findById(NOT_EXISTS_USER_ID);
+        assertTrue(user.isEmpty());
     }
 
     @Test
     void saveNewUser() {
         User user = new User(null, "NameOne", "NameOne@ot.co");
         user = userRepository.save(user);
-        user = userRepository.findById(user.id());
-        assertEquals("NameOne", user.name());
+        Optional<User> userFromDb = userRepository.findById(user.id());
+        assertEquals("NameOne", userFromDb.orElseThrow().name());
     }
 
     @Test
     void updateUser() {
         userRepository.save(new User(existsUserId, "Updated", "updated@ot.co"));
-        User updatedUser = userRepository.findById(existsUserId);
-        assertEquals("Updated", updatedUser.name());
-        assertEquals("updated@ot.co", updatedUser.email());
+        Optional<User> updatedUser = userRepository.findById(existsUserId);
+        assertEquals("Updated", updatedUser.orElseThrow().name());
+        assertEquals("updated@ot.co", updatedUser.orElseThrow().email());
     }
 
     @Test
@@ -65,8 +66,8 @@ public class InMemoryUserRepositoryTests {
     void deleteExistUser(){
         User user = userRepository.delete(existsUserId);
         assertNotNull(user);
-        user = userRepository.findById(existsUserId);
-        assertNull(user);
+        Optional<User> userFromDb = userRepository.findById(existsUserId);
+        assertTrue(userFromDb.isEmpty());
     }
 
     @Test
@@ -78,10 +79,10 @@ public class InMemoryUserRepositoryTests {
     @Test
     void saveShouldGenerateSequentialIds() {
         User firstUser = userRepository.save(new User(null, "first", "first@ot.co"));
-        User secoundUser = userRepository.save(new User(null, "secound", "secound@ot.co"));
-        assertEquals(firstUser.id() + 1, secoundUser.id());
-        userRepository.delete(secoundUser.id());
+        User secondUser = userRepository.save(new User(null, "second", "second@ot.co"));
+        assertEquals(firstUser.id() + 1, secondUser.id());
+        userRepository.delete(secondUser.id());
         User thirdUser = userRepository.save(new User(null, "third", "third@ot.co"));
-        assertEquals(secoundUser.id() + 1, thirdUser.id());
+        assertEquals(secondUser.id() + 1, thirdUser.id());
     }
 }

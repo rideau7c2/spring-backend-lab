@@ -1,7 +1,9 @@
 package com.gitlab.rideau7c2.backendlab.user;
 
+import java.util.Optional;
+
 public interface UserRepository {
-    User findById(Long id);
+    Optional<User> findById(Long id);
     User save(User user);
     User delete(Long id);
 }

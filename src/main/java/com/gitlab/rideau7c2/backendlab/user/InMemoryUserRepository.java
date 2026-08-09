@@ -16,10 +16,9 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User findById(Long id) {
+    public Optional<User> findById(Long id) {
         Objects.requireNonNull(id, "id must not be null");
-//        return Optional.ofNullable(users.get(id));
-        return users.get(id);
+        return Optional.ofNullable(users.get(id));
     }
 
     @Override
