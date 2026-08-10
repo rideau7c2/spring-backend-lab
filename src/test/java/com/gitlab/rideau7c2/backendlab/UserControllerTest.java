@@ -27,7 +27,7 @@ public class UserControllerTest {
 
     @BeforeEach
     void mockUsers() {
-        User user = new User(1L, "test", "test");
+        User user = new User(1L, "test", "test@ot.co");
         when(userService.getUser(1L)).thenReturn(user);
         when(userService.getUser(2L)).thenThrow(new UserNotFoundException(2L));
     }
@@ -38,7 +38,9 @@ public class UserControllerTest {
                 .andExpectAll(
                         status().isOk(),
                         content().contentType(MediaType.APPLICATION_JSON),
-                        jsonPath("$.name").value("test")
+                        jsonPath("$.name").value("test"),
+                        jsonPath("$.email").value("test@ot.co"),
+                        jsonPath("$.id").value(1L)
                 );
     }
 

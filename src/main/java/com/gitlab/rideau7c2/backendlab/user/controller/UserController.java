@@ -19,7 +19,10 @@ public class UserController {
     }
 
     @GetMapping("{id:\\d+}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
-        return ResponseEntity.ok(userService.getUser(id));
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+        User user = userService.getUser(id);
+        return ResponseEntity.ok(
+                new UserDto(user.id(), user.name(), user.email())
+        );
     }
 }
