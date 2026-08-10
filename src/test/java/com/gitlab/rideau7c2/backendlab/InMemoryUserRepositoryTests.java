@@ -1,8 +1,8 @@
 package com.gitlab.rideau7c2.backendlab;
 
-import com.gitlab.rideau7c2.backendlab.user.InMemoryUserRepository;
-import com.gitlab.rideau7c2.backendlab.user.User;
-import com.gitlab.rideau7c2.backendlab.user.UserRepository;
+import com.gitlab.rideau7c2.backendlab.user.repository.InMemoryUserRepository;
+import com.gitlab.rideau7c2.backendlab.user.repository.User;
+import com.gitlab.rideau7c2.backendlab.user.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

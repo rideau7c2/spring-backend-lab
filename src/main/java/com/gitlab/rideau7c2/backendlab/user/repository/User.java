@@ -1,4 +1,4 @@
-package com.gitlab.rideau7c2.backendlab.user;
+package com.gitlab.rideau7c2.backendlab.user.repository;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
